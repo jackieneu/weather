@@ -4,10 +4,33 @@
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Playground</title>
+    <title>Penrod Weather</title>
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Salesforce Lightning Design CSS -->
     <link rel="stylesheet" type="text/css" href="/assets/styles/salesforce-lightning-design-system.css" />
   </head>
   <body>
+
+    <!-- Javascript -->
+    <!--
+    <script type="application/javascript">
+      var request = new XMLHttpRequest();
+      request.open('GET', 'http://api.openweathermap.org/data/2.5/weather?id=5263045&units=imperial&APPID=8f85b0b140d857dee69d2c4e17d92148', true);
+      request.onload = function () {
+        // Begin accessing JSON data here
+        var data = JSON.parse(this.response);
+        if (request.status >= 200 && request.status < 400) {
+          data.forEach(item => {
+            console.log(item.main.temp);
+          });
+        } else {
+          console.log('error');
+        }
+      }
+      request.send();
+    </script>
+    -->
 
     <!-- Grid System Component -->
     <div class="slds-grid slds-wrap">
@@ -19,22 +42,21 @@
             <div class="slds-page-header__col-title">
               <div class="slds-media">
                 <div class="slds-media__figure">
-                  <span class="slds-icon_container slds-icon-standard-opportunity" title="opportunity">
+                  <span class="slds-icon_container slds-icon-standard-account" title="Description of icon when needed">
                     <svg class="slds-icon slds-page-header__icon" aria-hidden="true">
-                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#opportunity" />
+                      <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#default"></use>
                     </svg>
-                    <span class="slds-assistive-text">opportunity</span>
+                    <span class="slds-assistive-text">Description of icon when needed</span>
                   </span>
                 </div>
                 <div class="slds-media__body">
                   <div class="slds-page-header__name">
                     <div class="slds-page-header__name-title">
                       <h1>
-                        <span class="slds-page-header__title slds-truncate" title="Rohde Corp - 80,000 Widgets">Rohde Corp - 80,000 Widgets</span>
+                        <span class="slds-page-header__title slds-truncate" fonts="font-family-heading" title="Penrod Weather">Penrod Weather</span>
                       </h1>
                     </div>
                   </div>
-                  <p class="slds-page-header__name-meta">Mark Jaeckal • Unlimited Customer • 11/13/15</p>
                 </div>
               </div>
             </div>
@@ -42,36 +64,76 @@
         </div>
 
       </nav>
-      <main class="slds-col slds-size_1-of-2">
-
-        <!-- Image -->
-        <img src="https://s3-us-west-1.amazonaws.com/sfdc-demo/realty/house08.jpg" alt="Cool house." />
-
-      </main>
-      <aside class="slds-col slds-size_1-of-2">
+      <main class="slds-col slds-size_1-of-1">
 
         <!-- Tab Component -->
         <div class="slds-tabs_default">
-          <ul class="slds-tabs_default__nav" role="tablist">
+          <ul class="slds-tabs_default__nav" role="tablist" id="tab-list">
             <li class="slds-tabs_default__item slds-is-active" title="Item One" role="presentation">
-              <a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-default-1" id="tab-default-1__item">Item One</a>
+              <a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-default-1" id="tab-default-1__item">Milwaukee, WI</a>
             </li>
             <li class="slds-tabs_default__item" title="Item Two" role="presentation">
-              <a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-default-2" id="tab-default-2__item">Item Two</a>
+              <a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-default-2" id="tab-default-2__item">Minneapolis, MN</a>
             </li>
             <li class="slds-tabs_default__item" title="Item Three" role="presentation">
-              <a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-default-3" id="tab-default-3__item">Item Three</a>
+              <a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-default-3" id="tab-default-3__item">Chicago, IL</a>
+            </li>
+            <li class="slds-tabs_default__item" title="Item Four" role="presentation">
+              <a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-default-4" id="tab-default-4__item">Dallas, TX</a>
             </li>
           </ul>
-          <div id="tab-default-1" class="slds-tabs_default__content slds-show" role="tabpanel" aria-labelledby="tab-default-1__item">Item One Content</div>
-          <div id="tab-default-2" class="slds-tabs_default__content slds-hide" role="tabpanel" aria-labelledby="tab-default-2__item">Item Two Content</div>
-          <div id="tab-default-3" class="slds-tabs_default__content slds-hide" role="tabpanel" aria-labelledby="tab-default-3__item">Item Three Content</div>
+          <div id="tab-default-1" class="slds-tabs_default__content slds-show" role="tabpanel" aria-labelledby="tab-default-1__item">
+            <div id="openweathermap-widget-1"></div>
+          </div>
+          <div id="tab-default-2" class="slds-tabs_default__content slds-hide" role="tabpanel" aria-labelledby="tab-default-2__item">
+            <div id="openweathermap-widget-2"></div>
+          </div>
+          <div id="tab-default-3" class="slds-tabs_default__content slds-hide" role="tabpanel" aria-labelledby="tab-default-3__item">
+            <div id="openweathermap-widget-3"></div>
+          </div>
+          <div id="tab-default-4" class="slds-tabs_default__content slds-hide" role="tabpanel" aria-labelledby="tab-default-4__item">
+            <div id="openweathermap-widget-4"></div>
+          </div>
         </div>
 
-      </aside>
+        <!-- Weather Widget Milwaukee -->
+        <script>
+          window.myWidgetParam ? window.myWidgetParam : window.myWidgetParam = [];
+          //window.myWidgetParam.push({id: 22 ,cityid: '5263045',appid: '8f85b0b140d857dee69d2c4e17d92148',units: 'imperial',containerid: 'openweathermap-widget-1',  });
+          window.myWidgetParam.push({id: 22,cityid: '5037649',appid: '8f85b0b140d857dee69d2c4e17d92148',units: 'imperial',containerid: 'openweathermap-widget-2',  });
+          window.myWidgetParam.push({id: 22,cityid: '4887398',appid: '8f85b0b140d857dee69d2c4e17d92148',units: 'imperial',containerid: 'openweathermap-widget-3',  });
+          window.myWidgetParam.push({id: 22,cityid: '4684888',appid: '8f85b0b140d857dee69d2c4e17d92148',units: 'imperial',containerid: 'openweathermap-widget-4',  });
+
+          (function() {
+            var script = document.createElement('script');
+            script.async = true;
+            script.charset = "utf-8";
+            script.src = "//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/weather-widget-generator.js";
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(script, s);
+          })();
+        </script>
+
+        <!-- Custom Weather -->
+        
+
+        <!-- Javascript for Tab selection -->
+        <script>
+        $('.slds-tabs_default__link').click(function(){
+          $(this).parent().parent().find('.slds-tabs_default__link').attr('aria-selected','false');
+          $(this).attr('aria-selected','true');
+          $(this).parent().parent().find('.slds-tabs_default__link').attr('tabindex','-1');
+          $(this).attr('tabindex','0');
+          $(this).parent().addClass('slds-is-active').siblings().removeClass('slds-is-active');
+          $(this).parent().parent().parent().find('.'+$(this).parent().parent().parent().find('.slds-tabs_default__content')[0].classList[0]).removeClass('slds-show').addClass('slds-hide');
+          $(this).parent().parent().parent().find('#'+$(this).attr('aria-controls')).removeClass('slds-hide').addClass('slds-show');
+        });
+        </script>
+
+      </main>
       <section class="slds-col slds-size_1-of-1">
 
-        <!-- Card Component -->
+        <!-- Card Component
         <article class="slds-card">
           <div class="slds-card__header slds-grid">
             <header class="slds-media slds-media_center slds-has-flexi-truncate">
@@ -101,7 +163,7 @@
               <span class="slds-assistive-text">Accounts</span>
             </a>
           </footer>
-        </article>
+        </article> -->
 
       </section>
     </div>
