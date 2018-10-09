@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Playground</title>
+    <link rel="stylesheet" type="text/css" href="/assets/styles/salesforce-lightning-design-system.css" />
+  </head>
+  <body>
+
+    <!-- Grid System Component -->
+    <div class="slds-grid slds-wrap">
+      <nav class="slds-col slds-size_1-of-1">
+
+        <!-- Page Header Component -->
+        <div class="slds-page-header">
+          <div class="slds-page-header__row">
+            <div class="slds-page-header__col-title">
+              <div class="slds-media">
+                <div class="slds-media__figure">
+                  <span class="slds-icon_container slds-icon-standard-opportunity" title="opportunity">
+                    <svg class="slds-icon slds-page-header__icon" aria-hidden="true">
+                      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#opportunity" />
+                    </svg>
+                    <span class="slds-assistive-text">opportunity</span>
+                  </span>
+                </div>
+                <div class="slds-media__body">
+                  <div class="slds-page-header__name">
+                    <div class="slds-page-header__name-title">
+                      <h1>
+                        <span class="slds-page-header__title slds-truncate" title="Rohde Corp - 80,000 Widgets">Rohde Corp - 80,000 Widgets</span>
+                      </h1>
+                    </div>
+                  </div>
+                  <p class="slds-page-header__name-meta">Mark Jaeckal • Unlimited Customer • 11/13/15</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </nav>
+      <main class="slds-col slds-size_1-of-2">
+
+        <!-- Image -->
+        <img src="https://s3-us-west-1.amazonaws.com/sfdc-demo/realty/house08.jpg" alt="Cool house." />
+
+      </main>
+      <aside class="slds-col slds-size_1-of-2">
+
+        <!-- Tab Component -->
+        <div class="slds-tabs_default">
+          <ul class="slds-tabs_default__nav" role="tablist">
+            <li class="slds-tabs_default__item slds-is-active" title="Item One" role="presentation">
+              <a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-default-1" id="tab-default-1__item">Item One</a>
+            </li>
+            <li class="slds-tabs_default__item" title="Item Two" role="presentation">
+              <a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-default-2" id="tab-default-2__item">Item Two</a>
+            </li>
+            <li class="slds-tabs_default__item" title="Item Three" role="presentation">
+              <a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-default-3" id="tab-default-3__item">Item Three</a>
+            </li>
+          </ul>
+          <div id="tab-default-1" class="slds-tabs_default__content slds-show" role="tabpanel" aria-labelledby="tab-default-1__item">Item One Content</div>
+          <div id="tab-default-2" class="slds-tabs_default__content slds-hide" role="tabpanel" aria-labelledby="tab-default-2__item">Item Two Content</div>
+          <div id="tab-default-3" class="slds-tabs_default__content slds-hide" role="tabpanel" aria-labelledby="tab-default-3__item">Item Three Content</div>
+        </div>
+
+      </aside>
+      <section class="slds-col slds-size_1-of-1">
+
+        <!-- Card Component -->
+        <article class="slds-card">
+          <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+              <div class="slds-media__figure">
+                <span class="slds-icon_container slds-icon-standard-account" title="account">
+                  <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                    <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account"></use>
+                  </svg>
+                  <span class="slds-assistive-text">account</span>
+                </span>
+              </div>
+              <div class="slds-media__body">
+                <h2 class="slds-card__header-title">
+                  <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" title="Accounts">
+                    <span>Accounts</span>
+                  </a>
+                </h2>
+              </div>
+              <div class="slds-no-flex">
+                <button class="slds-button slds-button_neutral">New</button>
+              </div>
+            </header>
+          </div>
+          <div class="slds-card__body slds-card__body_inner">Anything can go in the Card Body</div>
+          <footer class="slds-card__footer">
+            <a class="slds-card__footer-action" href="javascript:void(0);">View All
+              <span class="slds-assistive-text">Accounts</span>
+            </a>
+          </footer>
+        </article>
+
+      </section>
+    </div>
+
+  </body>
+</html>
