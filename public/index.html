@@ -83,10 +83,34 @@
             </li>
           </ul>
           <div id="tab-default-1" class="slds-tabs_default__content slds-show" role="tabpanel" aria-labelledby="tab-default-1__item">
-            <div id="openweathermap-widget-1"></div>
+                <!-- Weather -->
+                <div class="slds-grid slds-grid_vertical">
+                  <div class="slds-col">
+                    <span class="weather_city_name">1</span>
+                  </div>
+                  <div class="slds-col">
+                    <span class="weather_img">2</span>
+                    <span class="weather_temp">3</span>
+                  </div>
+                  <div class="slds-col">
+                    <span class="weather_description">4</span>
+                  </div>
+              </div>
           </div>
           <div id="tab-default-2" class="slds-tabs_default__content slds-hide" role="tabpanel" aria-labelledby="tab-default-2__item">
             <div id="openweathermap-widget-2"></div>
+            <div class="slds-grid slds-grid_vertical">
+              <div class="slds-col">
+                <span id="weather_city_name">1</span>
+              </div>
+              <div class="slds-col">
+                <span id="weather_img">2</span>
+                <span id="weather_temp">3</span>
+              </div>
+              <div class="slds-col">
+                <span id="weather_description">4</span>
+              </div>
+          </div>
           </div>
           <div id="tab-default-3" class="slds-tabs_default__content slds-hide" role="tabpanel" aria-labelledby="tab-default-3__item">
             <div id="openweathermap-widget-3"></div>
@@ -99,7 +123,7 @@
         <!-- Weather Widget Milwaukee -->
         <script>
           window.myWidgetParam ? window.myWidgetParam : window.myWidgetParam = [];
-          window.myWidgetParam.push({id: 22 ,cityid: '5263045',appid: '8f85b0b140d857dee69d2c4e17d92148',units: 'imperial',containerid: 'openweathermap-widget-1',  });
+          //window.myWidgetParam.push({id: 22 ,cityid: '5263045',appid: '8f85b0b140d857dee69d2c4e17d92148',units: 'imperial',containerid: 'openweathermap-widget-1',  });
           window.myWidgetParam.push({id: 22,cityid: '5037649',appid: '8f85b0b140d857dee69d2c4e17d92148',units: 'imperial',containerid: 'openweathermap-widget-2',  });
           window.myWidgetParam.push({id: 22,cityid: '4887398',appid: '8f85b0b140d857dee69d2c4e17d92148',units: 'imperial',containerid: 'openweathermap-widget-3',  });
           window.myWidgetParam.push({id: 22,cityid: '4684888',appid: '8f85b0b140d857dee69d2c4e17d92148',units: 'imperial',containerid: 'openweathermap-widget-4',  });
@@ -115,6 +139,28 @@
         </script>
 
         <!-- Custom Weather -->
+        <script>
+        var request = new XMLHttpRequest();
+
+        request.open('GET', 'http://api.openweathermap.org/data/2.5/weather?id=5263045&units=imperial&APPID=8f85b0b140d857dee69d2c4e17d92148', true);
+        request.onload = function () {
+
+          // Begin accessing JSON data here
+          var data = JSON.parse(this.response);
+
+          if (request.status >= 200 && request.status < 400) {
+            var divToFill = document.getElementById("tab-default-1");
+            divToFill.getElementsByClassName("weather_city_name")[0].innerHTML = data.name + " Weather";
+            divToFill.getElementsByClassName("weather_img")[0].innerHTML = '<img src=\'http://openweathermap.org/img/w/' + data.weather[0].icon + '.png\' width = "50", height = "50">';
+            divToFill.getElementsByClassName("weather_temp")[0].innerHTML = data.main.temp + " &#8457";
+            divToFill.getElementsByClassName("weather_description")[0].innerHTML = data.weather[0].description;
+          } else {
+            console.log('error');
+          }
+        }
+
+        request.send();
+        </script>
 
 
         <!-- Javascript for Tab selection -->
