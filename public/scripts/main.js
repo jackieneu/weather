@@ -18,7 +18,7 @@
 </script>
 */
 
-
+/*
 // Weather Widget - All from Weather API site
   window.myWidgetParam ? window.myWidgetParam : window.myWidgetParam = [];
   //window.myWidgetParam.push({id: 22 ,cityid: '5263045',appid: '8f85b0b140d857dee69d2c4e17d92148',units: 'imperial',containerid: 'openweathermap-widget-1',  });
@@ -33,11 +33,12 @@
     script.src = "//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/weather-widget-generator.js";
     var s = document.getElementsByTagName('script')[0];
     s.parentNode.insertBefore(script, s);
-  })();
+  })();*/
 
 
 
 //Custom Weather
+/*
 var request = new XMLHttpRequest();
 
 request.open('GET', 'http://api.openweathermap.org/data/2.5/weather?id=5263045&units=imperial&APPID=8f85b0b140d857dee69d2c4e17d92148', true);
@@ -57,6 +58,7 @@ request.onload = function () {
   }
 }
 request.send();
+*/
 
 
 
