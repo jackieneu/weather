@@ -1,36 +1,53 @@
 
 angular.module('weatherApp',['angularMoment'])
 
-
-//.constant("moment", moment);
-
 .controller('mainCtrl', function($scope, dataService, moment) {
+  //Put general weather in scope
   dataService.getWeather(function(response) {
-      //console.log(response.data.list);
       $scope.weather = response.data.list;
-      //$scope.sunrise = moment.tz(response.data.list[0].sys.sunset, 'America/Chicago').format('LT');
     });
-    dataService.getHWeather(function(response){
+    //Create time array and put hourly weather in scope for each city
+    dataService.getHWeatherMil(function(response){
       var hWeather = response.data.list;
       var times = [];
       angular.forEach(hWeather, function(time){
         this.push(moment.tz(time.dt_txt,'Greenwich').clone().tz('America/Chicago').format('LT'));
       }, times);
       $scope.times = times;
-      $scope.HourlyWeather = response.data.list;
-      //$scope.time0=moment.tz(response.data.list[0].dt_txt, 'Greenwich').clone().tz('America/Chicago').format('LT');
+      $scope.HourlyWeatherMil = response.data.list;
+    });
+    dataService.getHWeatherMinn(function(response){
+      $scope.HourlyWeatherMinn = response.data.list;
+    });
+    dataService.getHWeatherChi(function(response){
+      $scope.HourlyWeatherChi = response.data.list;
+    });
+    dataService.getHWeatherDal(function(response){
+      $scope.HourlyWeatherDal = response.data.list;
     });
 })
 
-
 .service('dataService', function($http) {
+  //Pull General Current Weather
   this.getWeather = function(callback){
     $http.get('https://api.openweathermap.org/data/2.5/group?id=5263045,5037649,4887398,4684888&units=imperial&APPID=8f85b0b140d857dee69d2c4e17d92148')
     .then(callback)
   };
-
-  this.getHWeather = function(callback){
+  //Pull Hourly Weather for each city
+  this.getHWeatherMil = function(callback){
     $http.get('https://api.openweathermap.org/data/2.5/forecast?id=5263045&units=imperial&APPID=8f85b0b140d857dee69d2c4e17d92148')
+    .then(callback)
+  };
+  this.getHWeatherMinn = function(callback){
+    $http.get('https://api.openweathermap.org/data/2.5/forecast?id=5037649&units=imperial&APPID=8f85b0b140d857dee69d2c4e17d92148')
+    .then(callback)
+  };
+  this.getHWeatherChi = function(callback){
+    $http.get('https://api.openweathermap.org/data/2.5/forecast?id=4887398&units=imperial&APPID=8f85b0b140d857dee69d2c4e17d92148')
+    .then(callback)
+  };
+  this.getHWeatherDal = function(callback){
+    $http.get('https://api.openweathermap.org/data/2.5/forecast?id=4684888&units=imperial&APPID=8f85b0b140d857dee69d2c4e17d92148')
     .then(callback)
   };
 })
@@ -40,9 +57,3 @@ angular.module('weatherApp',['angularMoment'])
       return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
     }
 });
-
-
-
-
-
-//http://api.openweathermap.org/data/2.5/group?id=5263045,5037649,4887398,4684888&units=imperial&APPID=8f85b0b140d857dee69d2c4e17d92148

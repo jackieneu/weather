@@ -9,190 +9,293 @@
     <link rel="stylesheet" type="text/css" href="/assets/styles/salesforce-lightning-design-system.css" />
     <!-- AngularJS -->
     <script src="/vendor/angular.js" type="text/javascript"></script>
-
     <!--moment.js -->
     <script src="/vendor/moment.js" type="text/javascript"></script>
     <!--angular-moment.js -->
     <script src="/vendor/angular-moment.js" type="text/javascript"></script>
     <!--moment-timezone.js -->
     <script src="/vendor/moment-timezone.js" type="text/javascript"></script>
-
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Javascript/Angular Custom Files -->
     <script src="/scripts/main.js" type="text/javascript"></script>
     <script src="/scripts/app.js" type="text/javascript"></script>
-
-    <style>
-     /* Set the size of the div element that contains the map */
-    #map {
-      height: 400px;  /* The height is 400 pixels */
-      width: 100%;  /* The width is the width of the web page */
-     }
-  </style>
-
   </head>
   <body ng-app="weatherApp">
 
-
-    <!-- Grid System Component -->
-    <!-- <div class="slds-grid slds-wrap">
-      <nav class="slds-col slds-size_1-of-1"> -->
-
-        <!-- Page Header Component -->
-        <div class="slds-page-header">
-          <div class="slds-page-header__row">
-            <div class="slds-page-header__col-title">
-              <div class="slds-media">
-                <div class="slds-media__figure">
-                  <span class="slds-icon_container slds-icon-standard-account" title="Description of icon when needed">
-                    <svg class="slds-icon slds-page-header__icon" aria-hidden="true">
-                      <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#default"></use>
-                    </svg>
-                    <span class="slds-assistive-text">Description of icon when needed</span>
-                  </span>
-                </div>
-                <div class="slds-media__body">
-                  <div class="slds-page-header__name">
-                    <div class="slds-page-header__name-title">
-                      <h1>
-                        <span class="slds-page-header__title slds-truncate" fonts="font-family-heading" title="Penrod Weather">Penrod Weather</span>
-                      </h1>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- End Page Header -->
-
-      <!-- </nav> -->
-      <!-- <main class="slds-col slds-size_1-of-1"  -->
-      <!-- <div ng-controller="mainCtrl">
-        <div class="slds-grid"  >
-          <div class="slds-col slds-p-around_medium" ng-repeat="weather in weathers" >
-            <span > {{weather.name}} </span><br>
-            <div>
-              <img ng-src="http://openweathermap.org/img/w/{{weather.weather[0].icon}}.png">
-              <span > {{weather.main.temp | number:0}} &#8457 </span><br>
-              <span> {{weather.weather[0].description}} </span>
-              <br><br>
-            </div>
-          </div>
-       </div> -->
-
-
-
-
-        <!-- Tab Component -->
-        <div class="slds-tabs_default" ng-controller="mainCtrl">
-          <ul class="slds-tabs_default__nav" role="tablist" id="tab-list">
-            <li class="slds-tabs_default__item slds-is-active" title="Item One" role="presentation">
-              <a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-default-1" id="tab-default-1__item">Milwaukee, WI</a>
-            </li>
-            <li class="slds-tabs_default__item" title="Item Two" role="presentation">
-              <a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-default-2" id="tab-default-2__item">Minneapolis, MN</a>
-            </li>
-            <li class="slds-tabs_default__item" title="Item Three" role="presentation">
-              <a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-default-3" id="tab-default-3__item">Chicago, IL</a>
-            </li>
-            <li class="slds-tabs_default__item" title="Item Four" role="presentation">
-              <a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-default-4" id="tab-default-4__item">Dallas, TX</a>
-            </li>
-          </ul>
-          <!-- Tab 1: Milwaukee -->
-          <div id="tab-default-1"  class="slds-tabs_default__content slds-show" role="tabpanel" aria-labelledby="tab-default-1__item">
-            <div class="slds-grid slds-gutters">
-              <div class="slds-col" align="center">
-                <span>
-                  <div class="slds-box" style="border:hidden" >
-                    <div style="font-size:12pt" >Current Weather: </div>
-                    <img ng-src="http://openweathermap.org/img/w/{{weather[0].weather[0].icon}}.png">
-                    <span style="font-size:16pt"> {{weather[0].main.temp | number:0}} &#8457 </span><br>
-                    <span style="background-color:#ffb75d;color:#ffffff;border-radius:2px;margin:7px"> {{weather[0].main.temp_max | number:0}} &#8457 </span>
-                    <span style="background-color:#706e6b;color:#ffffff;border-radius:2px;margin:7px"> {{weather[0].main.temp_min | number:0}} &#8457 </span><br><br>
-                    <span> {{weather[0].weather[0].description | capitalize}} </span>
-                    <br><br>
-                  </div>
-                </span>
-              </div>
-
-              <div class="slds-col" >
-                <span>
-                  <div class="slds-box" style="width:50%;border:hidden;margin:7px">
-                    <table class="slds-table slds-table_cell-buffer slds-table_bordered">
-                      <tbody>
-                        <tr>
-                          <td>Wind: </td>
-                          <td> {{weather[0].wind.speed}} m/h </td>
-                        </tr>
-                        <tr>
-                          <td>Pressure: </td>
-                          <td> {{weather[0].main.pressure}} hpa</td>
-                        </tr>
-                        <tr>
-                          <td>Humidity: </td>
-                          <td> {{weather[0].main.humidity}} %</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                </div>
+    <!-- Page Header Component -->
+    <div class="slds-page-header">
+      <div class="slds-page-header__row">
+        <div class="slds-page-header__col-title">
+          <div class="slds-media">
+            <div class="slds-media__figure">
+              <span class="slds-icon_container slds-icon-standard-account" title="Description of icon when needed">
+                <svg class="slds-icon slds-page-header__icon" aria-hidden="true">
+                  <use xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#default"></use>
+                </svg>
+                <span class="slds-assistive-text">Description of icon when needed</span>
               </span>
             </div>
-          </div>
-
-          <div class="slds-box" style="border:hidden">
-            <table class="slds-table slds-table_cell-buffer slds-table_bordered" align="center" >
-              <tbody>
-                <tr>
-                  <th style="text-align:center" ng-repeat="time in times|limitTo:8">{{time}}</th>
-                </tr>
-                <tr>
-                  <td style="text-align:center" ng-repeat="icon in HourlyWeather|limitTo:8"><img ng-src="http://openweathermap.org/img/w/{{icon.weather[0].icon}}.png"><br>{{icon.main.temp | number:0}} &#8457<br>{{icon.wind.speed | number:0}} m/h</td>
-                  <!--<br>{{icon.main.temp | number:0}} &#8457<br>{{icon.wind.speed}} m/h -->
-                </tr>
-              </tbody>
-            </table>
+            <div class="slds-media__body">
+              <div class="slds-page-header__name">
+                <div class="slds-page-header__name-title">
+                  <h1>
+                    <span class="slds-page-header__title slds-truncate" fonts="font-family-heading" title="Penrod Weather">Penrod Weather</span>
+                  </h1>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-          <!-- Tab 2: Minneapolis -->
-          <div id="tab-default-2" class="slds-tabs_default__content slds-hide" role="tabpanel" aria-labelledby="tab-default-2__item">
-
-            <span > {{weathers[1].name}} </span><br>
-            <div>
-              <img ng-src="http://openweathermap.org/img/w/{{weathers[1].weather[0].icon}}.png">
-              <span > {{weathers[1].main.temp | number:0}} &#8457 </span><br>
-              <span> {{weathers[1].weather[0].description}} </span>
-            </div>
-
-          </div>
-          <!-- Tab 3: Chicago -->
-          <div id="tab-default-3" class="slds-tabs_default__content slds-hide" role="tabpanel" aria-labelledby="tab-default-3__item">
-
-            <span > {{weathers[2].name}} </span><br>
-            <div>
-              <img ng-src="http://openweathermap.org/img/w/{{weathers[2].weather[0].icon}}.png">
-              <span > {{weathers[2].main.temp | number:0}} &#8457 </span><br>
-              <span> {{weathers[2].weather[0].description}} </span>
-            </div>
-
-          </div>
-          <!-- Tab 4: Dallas -->
-          <div id="tab-default-4" class="slds-tabs_default__content slds-hide" role="tabpanel" aria-labelledby="tab-default-4__item">
-
-            <span > {{weathers[3].name}} </span><br>
-            <div>
-              <img ng-src="http://openweathermap.org/img/w/{{weathers[3].weather[0].icon}}.png">
-              <span > {{weathers[3].main.temp | number:0}} &#8457 </span><br>
-              <span> {{weathers[3].weather[0].description}} </span>
-            </div>
-
-          </div>
-        </div>
-        <!-- End Tab Component -->
-
-      <!-- </main> -->
+      </div>
     </div>
+    <!-- End Page Header -->
+
+    <!-- Tab Component -->
+    <div class="slds-tabs_default" ng-controller="mainCtrl">
+      <!-- Tabs -->
+      <ul class="slds-tabs_default__nav" role="tablist" id="tab-list">
+        <li class="slds-tabs_default__item slds-is-active" title="Item One" role="presentation">
+          <a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="0" aria-selected="true" aria-controls="tab-default-1" id="tab-default-1__item">Milwaukee, WI</a>
+        </li>
+        <li class="slds-tabs_default__item" title="Item Two" role="presentation">
+          <a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-default-2" id="tab-default-2__item">Minneapolis, MN</a>
+        </li>
+        <li class="slds-tabs_default__item" title="Item Three" role="presentation">
+          <a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-default-3" id="tab-default-3__item">Chicago, IL</a>
+        </li>
+        <li class="slds-tabs_default__item" title="Item Four" role="presentation">
+          <a class="slds-tabs_default__link" href="javascript:void(0);" role="tab" tabindex="-1" aria-selected="false" aria-controls="tab-default-4" id="tab-default-4__item">Dallas, TX</a>
+        </li>
+      </ul>
+      <!-- Tab 1 Content: Milwaukee -->
+      <div id="tab-default-1"  class="slds-tabs_default__content slds-show" role="tabpanel" aria-labelledby="tab-default-1__item">
+        <div class="slds-grid slds-gutters">
+          <div class="slds-col" align="center">
+            <span>
+              <!-- Current Weather -->
+              <div class="slds-box" style="border:hidden" >
+                <div style="font-size:12pt" >Current Weather: </div>
+                <img ng-src="http://openweathermap.org/img/w/{{weather[0].weather[0].icon}}.png">
+                <span style="font-size:16pt"> {{weather[0].main.temp | number:0}} &#8457; </span><br>
+                <span style="background-color:#ffb75d;color:#ffffff;border-radius:2px;margin:7px"> {{weather[0].main.temp_max | number:0}} &#8457; </span>
+                <span style="background-color:#706e6b;color:#ffffff;border-radius:2px;margin:7px"> {{weather[0].main.temp_min | number:0}} &#8457; </span><br><br>
+                <span> {{weather[0].weather[0].description | capitalize}} </span>
+                <br><br>
+              </div>
+            </span>
+          </div>
+          <div class="slds-col" >
+            <span>
+              <!-- Current Weather Table -->
+              <div class="slds-box" style="width:50%;border:hidden;margin:7px">
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                  <tbody>
+                    <tr>
+                      <td>Wind: </td>
+                      <td> {{weather[0].wind.speed}} m/h </td>
+                    </tr>
+                    <tr>
+                      <td>Pressure: </td>
+                      <td> {{weather[0].main.pressure}} hpa</td>
+                    </tr>
+                    <tr>
+                      <td>Humidity: </td>
+                      <td> {{weather[0].main.humidity}} %</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </span>
+          </div>
+        </div>
+        <!-- Hourly Weather -->
+        <div class="slds-box" style="border:hidden">
+          <table class="slds-table slds-table_cell-buffer slds-table_bordered" align="center" >
+            <tbody>
+              <tr>
+                <th style="text-align:center" ng-repeat="time in times|limitTo:8">{{time}}</th>
+              </tr>
+              <tr>
+                <td style="text-align:center" ng-repeat="icon in HourlyWeatherMil|limitTo:8"><img ng-src="http://openweathermap.org/img/w/{{icon.weather[0].icon}}.png"><br>{{icon.main.temp | number:0}} &#8457;<br>{{icon.wind.speed | number:0}} m/h</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab 2: Minneapolis -->
+      <div id="tab-default-2" class="slds-tabs_default__content slds-hide" role="tabpanel" aria-labelledby="tab-default-2__item">
+        <div class="slds-grid slds-gutters">
+          <div class="slds-col" align="center">
+            <span>
+              <!-- Current Weather -->
+              <div class="slds-box" style="border:hidden" >
+                <div style="font-size:12pt" >Current Weather: </div>
+                <img ng-src="http://openweathermap.org/img/w/{{weather[1].weather[0].icon}}.png">
+                <span style="font-size:16pt"> {{weather[1].main.temp | number:0}} &#8457; </span><br>
+                <span style="background-color:#ffb75d;color:#ffffff;border-radius:2px;margin:7px"> {{weather[1].main.temp_max | number:0}} &#8457; </span>
+                <span style="background-color:#706e6b;color:#ffffff;border-radius:2px;margin:7px"> {{weather[1].main.temp_min | number:0}} &#8457; </span><br><br>
+                <span> {{weather[1].weather[0].description | capitalize}} </span>
+                <br><br>
+              </div>
+            </span>
+          </div>
+          <div class="slds-col" >
+            <span>
+              <!-- Current Weather Table -->
+              <div class="slds-box" style="width:50%;border:hidden;margin:7px">
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                  <tbody>
+                    <tr>
+                      <td>Wind: </td>
+                      <td> {{weather[1].wind.speed}} m/h </td>
+                    </tr>
+                    <tr>
+                      <td>Pressure: </td>
+                      <td> {{weather[1].main.pressure}} hpa</td>
+                    </tr>
+                    <tr>
+                      <td>Humidity: </td>
+                      <td> {{weather[1].main.humidity}} %</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </span>
+          </div>
+        </div>
+        <!-- Hourly Weather -->
+        <div class="slds-box" style="border:hidden">
+          <table class="slds-table slds-table_cell-buffer slds-table_bordered" align="center" >
+            <tbody>
+              <tr>
+                <th style="text-align:center" ng-repeat="time in times|limitTo:8">{{time}}</th>
+              </tr>
+              <tr>
+                <td style="text-align:center" ng-repeat="icon in HourlyWeatherMinn|limitTo:8"><img ng-src="http://openweathermap.org/img/w/{{icon.weather[0].icon}}.png"><br>{{icon.main.temp | number:0}} &#8457;<br>{{icon.wind.speed | number:0}} m/h</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab 3: Chicago -->
+      <div id="tab-default-3" class="slds-tabs_default__content slds-hide" role="tabpanel" aria-labelledby="tab-default-3__item">
+
+        <div class="slds-grid slds-gutters">
+          <div class="slds-col" align="center">
+            <span>
+              <!-- Current Weather -->
+              <div class="slds-box" style="border:hidden" >
+                <div style="font-size:12pt" >Current Weather: </div>
+                <img ng-src="http://openweathermap.org/img/w/{{weather[2].weather[0].icon}}.png">
+                <span style="font-size:16pt"> {{weather[2].main.temp | number:0}} &#8457; </span><br>
+                <span style="background-color:#ffb75d;color:#ffffff;border-radius:2px;margin:7px"> {{weather[2].main.temp_max | number:0}} &#8457; </span>
+                <span style="background-color:#706e6b;color:#ffffff;border-radius:2px;margin:7px"> {{weather[2].main.temp_min | number:0}} &#8457; </span><br><br>
+                <span> {{weather[2].weather[0].description | capitalize}} </span>
+                <br><br>
+              </div>
+            </span>
+          </div>
+          <div class="slds-col" >
+            <span>
+              <!-- Current Weather Table -->
+              <div class="slds-box" style="width:50%;border:hidden;margin:7px">
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                  <tbody>
+                    <tr>
+                      <td>Wind: </td>
+                      <td> {{weather[2].wind.speed}} m/h </td>
+                    </tr>
+                    <tr>
+                      <td>Pressure: </td>
+                      <td> {{weather[2].main.pressure}} hpa</td>
+                    </tr>
+                    <tr>
+                      <td>Humidity: </td>
+                      <td> {{weather[2].main.humidity}} %</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </span>
+          </div>
+        </div>
+        <!-- Hourly Weather -->
+        <div class="slds-box" style="border:hidden">
+          <table class="slds-table slds-table_cell-buffer slds-table_bordered" align="center" >
+            <tbody>
+              <tr>
+                <th style="text-align:center" ng-repeat="time in times|limitTo:8">{{time}}</th>
+              </tr>
+              <tr>
+                <td style="text-align:center" ng-repeat="icon in HourlyWeatherChi|limitTo:8"><img ng-src="http://openweathermap.org/img/w/{{icon.weather[0].icon}}.png"><br>{{icon.main.temp | number:0}} &#8457;<br>{{icon.wind.speed | number:0}} m/h</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+      <!-- Tab 4: Dallas -->
+      <div id="tab-default-4" class="slds-tabs_default__content slds-hide" role="tabpanel" aria-labelledby="tab-default-4__item">
+
+        <div class="slds-grid slds-gutters">
+          <div class="slds-col" align="center">
+            <span>
+              <!-- Current Weather -->
+              <div class="slds-box" style="border:hidden" >
+                <div style="font-size:12pt" >Current Weather: </div>
+                <img ng-src="http://openweathermap.org/img/w/{{weather[3].weather[0].icon}}.png">
+                <span style="font-size:16pt"> {{weather[3].main.temp | number:0}} &#8457; </span><br>
+                <span style="background-color:#ffb75d;color:#ffffff;border-radius:2px;margin:7px"> {{weather[3].main.temp_max | number:0}} &#8457; </span>
+                <span style="background-color:#706e6b;color:#ffffff;border-radius:2px;margin:7px"> {{weather[3].main.temp_min | number:0}} &#8457; </span><br><br>
+                <span> {{weather[3].weather[0].description | capitalize}} </span>
+                <br><br>
+              </div>
+            </span>
+          </div>
+          <div class="slds-col" >
+            <span>
+              <!-- Current Weather Table -->
+              <div class="slds-box" style="width:50%;border:hidden;margin:7px">
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                  <tbody>
+                    <tr>
+                      <td>Wind: </td>
+                      <td> {{weather[3].wind.speed}} m/h </td>
+                    </tr>
+                    <tr>
+                      <td>Pressure: </td>
+                      <td> {{weather[3].main.pressure}} hpa</td>
+                    </tr>
+                    <tr>
+                      <td>Humidity: </td>
+                      <td> {{weather[3].main.humidity}} %</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </span>
+          </div>
+        </div>
+        <!-- Hourly Weather -->
+        <div class="slds-box" style="border:hidden">
+          <table class="slds-table slds-table_cell-buffer slds-table_bordered" align="center" >
+            <tbody>
+              <tr>
+                <th style="text-align:center" ng-repeat="time in times|limitTo:8">{{time}}</th>
+              </tr>
+              <tr>
+                <td style="text-align:center" ng-repeat="icon in HourlyWeatherDal|limitTo:8"><img ng-src="http://openweathermap.org/img/w/{{icon.weather[0].icon}}.png"><br>{{icon.main.temp | number:0}} &#8457;<br>{{icon.wind.speed | number:0}} m/h</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+    <!-- End Tab Component -->
 
   </body>
 </html>
