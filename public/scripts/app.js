@@ -25,7 +25,7 @@ angular.module('weatherApp',['angularMoment'])
 
 .service('dataService', function($http) {
   this.getWeather = function(callback){
-    $http.get('http://api.openweathermap.org/data/2.5/group?id=5263045,5037649,4887398,4684888&units=imperial&APPID=8f85b0b140d857dee69d2c4e17d92148')
+    $http.get('https://api.openweathermap.org/data/2.5/group?id=5263045,5037649,4887398,4684888&units=imperial&APPID=8f85b0b140d857dee69d2c4e17d92148')
     .then(callback)
   };
 
